@@ -1,0 +1,9 @@
+1: kreativ vezeto
+2: segito, egyuttmukodo, alkalmazkodo
+3: szorakoztato
+4: realista
+5: optimista
+6: harmonikus, csaladcentrikus
+7: celtudatos, szellemi vezeto
+8: karrier, siker, szenvedely
+9: szellemiseg

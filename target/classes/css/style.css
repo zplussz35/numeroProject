@@ -1,0 +1,15 @@
+.root{
+        -fx-border-style: solid;
+        -fx-background-image: url("/images/sand_background.jpg");
+}
+
+.button{
+    -fx-background-color: lightyellow;
+}
+
+.label{
+    -fx-font-family: sans-serif;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
+}
+

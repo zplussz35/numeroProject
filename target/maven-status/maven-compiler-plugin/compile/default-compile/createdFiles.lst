@@ -1,0 +1,9 @@
+org\example\controllers\ElemzesekController.class
+org\example\model\NameValidator.class
+org\example\model\PersonNumbers.class
+org\example\NumerologyApplication.class
+org\example\Main.class
+org\example\model\DateValidator.class
+org\example\model\NumerologyModel.class
+org\example\controllers\StartPageController.class
+org\example\Helper.class
