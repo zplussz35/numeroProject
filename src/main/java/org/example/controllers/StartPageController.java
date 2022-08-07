@@ -112,6 +112,7 @@ public class StartPageController {
 	}
 
 	public void selectPreName(ActionEvent actionEvent) {
+
 		Object o = actionEvent.getTarget();
 		if (o == null) {
 			return;

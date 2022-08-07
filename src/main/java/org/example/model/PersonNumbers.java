@@ -135,7 +135,7 @@ public class PersonNumbers {
 			String dob = birthDate;
 			String validableDob = dob.replace(".", "");
 			if (birthDate.isEmpty() || !dateValidator.isValid(validableDob)) {
-				System.out.println("Nem valid dátum! (" + birthDate + ")");
+				System.out.println("calculateNumbers()->Nem valid dátum! (" + birthDate + ")");
 				return;
 			}
 			List<Integer> numbers = Arrays.stream(birthDate.split("\\.")).map(Integer::parseInt).limit(3).toList();
@@ -163,6 +163,7 @@ public class PersonNumbers {
 				sum = 18;
 			}
 
+			dateNumbers.clear();
 			for (Integer num : numbers) {
 				while (num > 0) {
 					if (num % 10 != 0) {
