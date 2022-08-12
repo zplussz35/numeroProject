@@ -121,8 +121,8 @@ public class StartPageController {
 		preName = numerologyModel.ekezetTorles(preName).toLowerCase().strip();
 		personNumbers.setPreName(preName);
 		personNumbers.setPreNameNumber(numerologyModel.sumNameCalculator(preName));
-		personNumbers.setPreNameInnerNumber(numerologyModel.sumNameCalculator(preName));
-		personNumbers.setPreNameOuterNumber(numerologyModel.sumNameCalculator(preName));
+		personNumbers.setPreNameInnerNumber(numerologyModel.sumMGHCalculator(preName));
+		personNumbers.setPreNameOuterNumber(numerologyModel.sumMSHCalculator(preName));
 	}
 
 	@FXML
@@ -156,7 +156,7 @@ public class StartPageController {
 					.toList();
 			StringBuilder sb = new StringBuilder();
 			for (int i = 1; i < 10; i++) {
-
+				sb.append("- ");
 				for (int n : personNumbers.getDateNumbers()) {
 					if (n == i) {
 						sb.append("X");
@@ -212,12 +212,25 @@ public class StartPageController {
 					sb.append(" (K)");
 				}
 
-				sb.append("\n"); //------------------------------------------------
+				sb.append("\n- "); //------------------------------------------------
 
 				for (char c : ekezetMentesNev.toCharArray()) {
 					if (numerologyModel.isMGH(c) && BETUERTEK.get(c) == i) {
 						sb.append("o");
 					}
+				}
+
+				if (numerologyModel.reduct(personNumbers.getPreNameInnerNumber())==i){
+					sb.append(" preBÉ(").append(personNumbers.getPreNameInnerNumber()).append(")");
+				}
+				if (numerologyModel.reduct(personNumbers.getFamilyInnerNameNumber())== i){
+					sb.append(" csBÉ(").append(personNumbers.getFamilyInnerNameNumber()).append(")");
+				}
+				if(numerologyModel.reduct(personNumbers.getSurname1InnerNumber())==i){
+					sb.append(" 1.BÉ(").append(personNumbers.getSurname1InnerNumber()).append(")");
+				}
+				if(numerologyModel.reduct(personNumbers.getSurname2InnerNumber())==i){
+					sb.append(" 2.BÉ(").append(personNumbers.getSurname2InnerNumber()).append(")");
 				}
 				if (numerologyModel.isInnerNumber(ekezetMentesNev, i)) {
 					sb.append(" BÉ");
@@ -225,10 +238,23 @@ public class StartPageController {
 
 				String bigInnerNumber = Integer.toString(personNumbers.getBigInnerNumber());
 				if (bigInnerNumber.startsWith(firstNumber)) {
-					sb.append(" ").append(bigInnerNumber);
+					sb.append(" bé(").append(bigInnerNumber).append(")");
 				}
 
-				sb.append("\n"); //------------------------------------------------
+				sb.append("\n- "); //------------------------------------------------
+
+				if (numerologyModel.reduct(personNumbers.getPreNameNumber())==i){
+					sb.append(" pre(").append(personNumbers.getPreNameNumber()).append(")");
+				}
+				if (numerologyModel.reduct(personNumbers.getFamilyNameNumber())==i){
+					sb.append(" cs(").append(personNumbers.getFamilyNameNumber()).append(")");
+				}
+				if(numerologyModel.reduct(personNumbers.getSurname1Number())==i){
+					sb.append(" 1.(").append(personNumbers.getSurname1Number()).append(")");
+				}
+				if(numerologyModel.reduct(personNumbers.getSurname2Number())==i){
+					sb.append(" 2.(").append(personNumbers.getSurname2Number()).append(")");
+				}
 
 				String stringBigPersonNum = Integer.toString(personNumbers.getBigPersonalityNumber());
 				if (stringBigPersonNum.startsWith(firstNumber)) {
@@ -239,19 +265,33 @@ public class StartPageController {
 					sb.append(" Sz");
 				}
 
-				sb.append("\n"); //------------------------------------------------
+				sb.append("\n- "); //------------------------------------------------
 
 				for (char c : ekezetMentesNev.toCharArray()) {
 					if (numerologyModel.isMSH(c) && BETUERTEK.get(c) == i) {
 						sb.append("o");
 					}
 				}
+
+				if (numerologyModel.reduct(personNumbers.getPreNameOuterNumber())==i){
+					sb.append(" preKÉ(").append(personNumbers.getPreNameOuterNumber()).append(")");
+				}
+				if (numerologyModel.reduct(personNumbers.getFamilyOuterNameNumber())==i){
+					sb.append(" csKÉ(").append(personNumbers.getFamilyOuterNameNumber()).append(")");
+				}
+				if(numerologyModel.reduct(personNumbers.getSurname1OuterNumber())==i){
+					sb.append(" 1.KÉ(").append(personNumbers.getSurname1OuterNumber()).append(")");
+				}
+				if(numerologyModel.reduct(personNumbers.getSurname2OuterNumber())==i){
+					sb.append(" 2.KÉ(").append(personNumbers.getSurname2OuterNumber()).append(")");
+				}
+
 				if (numerologyModel.isOuterNumber(ekezetMentesNev, i)) {
 					sb.append(" KÉ");
 				}
 				String bigOuterNumber = Integer.toString(personNumbers.getBigOuterNumber());
 				if (bigOuterNumber.startsWith(firstNumber)) {
-					sb.append(" ").append(bigOuterNumber);
+					sb.append(" ké(").append(bigOuterNumber).append(")");
 				}
 
 				textAreas.get(i - 1).setText(sb.toString());
@@ -309,7 +349,7 @@ public class StartPageController {
 	}
 
 	public void selenctNem(ActionEvent actionEvent) {
-		String nem = String.valueOf(((ChoiceBox<String>) actionEvent.getTarget()).getValue());
+			String nem = String.valueOf(((ChoiceBox<String>) actionEvent.getTarget()).getValue());
 		if (nem.equals("FÉRFI")) {
 			personNumbers.setNem(Nem.FERFI);
 		} else if (nem.equals("NŐ")) {

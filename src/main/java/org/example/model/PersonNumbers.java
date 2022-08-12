@@ -253,9 +253,16 @@ public class PersonNumbers {
 	}
 
 	public void calculateNameNumbers() {
+		String fullName;
+		if (this.preName == null || this.preName.equals("")){
+			fullName=this.name;
+		} else{
+			fullName=this.preName+" "+this.name;
+		}
+
 		Map<Character, Integer> BETUERTEK = numerologyModel.createBetuErtekFromFile();
 		this.nameCharArray = String.join("", name.split(" ")).toCharArray();
-		String[] nameParts = name.split(" ");
+		String[] nameParts = fullName.split(" ");
 		if (this.preName == null || this.preName.equals("")){
 			if (nameParts.length == 1) {
 				this.surname1 = nameParts[0];
@@ -326,19 +333,18 @@ public class PersonNumbers {
 				this.surname2InnerNumber = numerologyModel.sumMGHCalculator(surname2);
 				this.surname2OuterNumber = numerologyModel.sumMSHCalculator(surname2);
 			}
-
 		}
 
 
-		for (char c : nameCharArray) {
+		for (char c : fullName.toCharArray()) {
 			nameNumbers.add(BETUERTEK.get(c));
 		}
-		this.bigInnerNumber = numerologyModel.sumMGHCalculator(name);
-		this.bigOuterNumber = numerologyModel.sumMSHCalculator(name);
-		this.bigPersonalityNumber = numerologyModel.sumNameCalculator(name);
-		this.innerNumber = numerologyModel.reduct(numerologyModel.sumMGHCalculator(name));
-		this.outerNumber = numerologyModel.reduct(numerologyModel.sumMSHCalculator(name));
-		this.personalityNumber = numerologyModel.reduct(numerologyModel.sumNameCalculator(name));
+		this.bigInnerNumber = numerologyModel.sumMGHCalculator(fullName);
+		this.bigOuterNumber = numerologyModel.sumMSHCalculator(fullName);
+		this.bigPersonalityNumber = numerologyModel.sumNameCalculator(fullName);
+		this.innerNumber = numerologyModel.reduct(numerologyModel.sumMGHCalculator(fullName));
+		this.outerNumber = numerologyModel.reduct(numerologyModel.sumMSHCalculator(fullName));
+		this.personalityNumber = numerologyModel.reduct(numerologyModel.sumNameCalculator(fullName));
 	}
 
 	public static void main(String[] args) {
